@@ -1,29 +1,32 @@
 package new_package;
 
-import java.awt.*;
+import new_package.objects.SnakeHead;
 
 public class Game {
 	public boolean stopCondition = false;
 	private Field field;
 	private Snake snake;
-	public final int CellSize = 70;
+	public Gui gui;
+	private AppleGenerator appleGenerator;
+	private Point newDirection;
 
-	Game(){
+	public Game(){
 		field = new Field(15,15);
 		snake = new Snake(this);
+		gui = new Gui(this);
+		appleGenerator = new AppleGenerator(this.field);
+		newDirection = SnakeHead.DIRECTION_RIGHT;
 	}
 
 	void start() throws InterruptedException {
-		Window window = new Window(this);
-		Drawer drawer = new Drawer(this);
-		window.getContentPane().add(BorderLayout.CENTER, drawer);
-		window.setVisible(true);
-
+		gui.InitUI();
+		getAppleGenerator().placeAppleOnRandomEmptyCell();
 		while (!stopCondition) {
 			try {
-				Thread.sleep(100);
+				Thread.sleep(200);
+				snake.setDirection(newDirection);
 				snake.Move();
-				drawer.repaint();
+				gui.getDrawer().repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -36,5 +39,13 @@ public class Game {
 
 	public Field getField() {
 		return field;
+	}
+
+	public void setNewDirection(Point newDirection) {
+		this.newDirection = newDirection;
+	}
+
+	public AppleGenerator getAppleGenerator() {
+		return appleGenerator;
 	}
 }

@@ -2,7 +2,6 @@ package new_package.objects;
 
 import new_package.Game;
 import new_package.Point;
-import org.eclipse.swt.graphics.ImageData;
 
 public class SnakeHead implements FieldObject{
 	public static Point DIRECTION_UP = new Point(0, -1);
@@ -12,13 +11,13 @@ public class SnakeHead implements FieldObject{
 	private Point direction;
 
 	public void setDirection(Point dir) {
-		if (!(direction.x*dir.x == 1 || direction.y*dir.y == 1))
-	        direction = dir;
+		if (!(direction.x*dir.x == -1 || direction.y*dir.y == -1))
+			direction = dir;
 	}
 
 	@Override
-	public ImageData getImageData() {
-		return new ImageData("src/textures/snakehead.png");
+	public String getFilepath() {
+		return "src/textures/snakehead.png";
 	}
 
 	public SnakeHead(Point dir){

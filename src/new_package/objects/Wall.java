@@ -1,12 +1,11 @@
 package new_package.objects;
 
 import new_package.Game;
-import org.eclipse.swt.graphics.ImageData;
 
 public class Wall implements FieldObject{
 	@Override
-	public ImageData getImageData(){
-		return new ImageData("src/textures/wall.png");
+	public String getFilepath(){
+		return "src/textures/wall.png";
 	}
 
 	public void intersect(Game g) {
@@ -14,4 +13,3 @@ public class Wall implements FieldObject{
 		System.out.print("Game over");
 	}
 }
-

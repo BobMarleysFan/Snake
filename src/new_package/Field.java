@@ -1,17 +1,18 @@
 package new_package;
 
-import new_package.objects.Apple;
 import new_package.objects.EmptyCell;
 import new_package.objects.FieldObject;
 import new_package.objects.Wall;
 
-class Field {
+import java.util.ArrayList;
+
+public class Field {
 	private int height;
 	private int width;
 	private FieldObject[][] field;
 
 
-	Field(int width, int height){
+	public Field(int width, int height){
 		field = new FieldObject[width][height];
 		for(int i=0; i < width; i++)
 			for (int j=0; j < height; j++)
@@ -19,7 +20,6 @@ class Field {
 					field[i][j] = new Wall();
 				else
 					field[i][j] = new EmptyCell();
-		field[5][9] = new Apple();
 		this.height = height;
 		this.width = width;
 	}
@@ -42,5 +42,15 @@ class Field {
 		if (x<0 || x > this.width || y<0 || y > this.height)
 			throw new IndexOutOfBoundsException();
 		this.field[x][y] = object;
+	}
+
+	public ArrayList<Point> getEmptyCells(){
+		ArrayList<Point> emptyCells = new ArrayList<>();
+		for(int x = 0; x < this.getWidth(); x++)
+			for (int y = 0; y < this.getHeight(); y++)
+				if (this.getObjectAt(x, y) instanceof EmptyCell){
+					emptyCells.add(new Point(x, y));
+				}
+		return emptyCells;
 	}
 }

@@ -1,22 +1,25 @@
 package new_package;
 
-import new_package.objects.FieldObject;
-import new_package.objects.SnakeBody;
-import new_package.objects.SnakeHead;
-import new_package.objects.Wall;
-import new_package.objects.Apple;
+import new_package.objects.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
 
 public class Drawer extends JPanel {
     private Game game;
+    private int cellSize;
 
-    public Drawer(Game game) {
+    public Drawer(Game game, int cellSize) {
         this.game = game;
+        this.cellSize = cellSize;
         setPreferredSize(new Dimension(
-                game.getField().getWidth() * game.CellSize,
-                game.getField().getHeight() * game.CellSize)
+                game.getField().getWidth() * cellSize,
+                game.getField().getHeight() * cellSize)
         );
         setBackground(Color.BLACK);
     }
@@ -28,50 +31,57 @@ public class Drawer extends JPanel {
         for (int x = 0; x < game.getField().getWidth(); x++){
             for (int y = 0; y < game.getField().getHeight(); y++) {
                 FieldObject object = game.getField().getObjectAt(x, y);
-                if (object instanceof Wall) {
-                    paint_cell(g,x,y, Color.BLACK);
-                } else if (object instanceof SnakeBody) {
-                    paint_cell(g,x,y,Color.green);
-                } else if (object instanceof SnakeHead) {
-                    paint_cell(g,x,y,Color.blue);
-                } else if (object instanceof Apple) {
-                    paint_cell(g,x,y,Color.red);
+                try {
+                    drawObject(g, x, y, object);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }}
-        //paint_circle(g, game.snake.getBody().get(0), Color.black);
 
         if (game.stopCondition) {
             g.setColor(Color.red);
             g.setFont(new Font("Arial", Font.BOLD, 40));
             FontMetrics fm = g.getFontMetrics();
-            g.drawString("GAME OVER", (game.getField().getWidth() * game.CellSize - fm.stringWidth("GAME OVER")) / 2,
-                    (game.getField().getHeight() * game.CellSize) / 2);
+            g.drawString("GAME OVER", (game.getField().getWidth() * cellSize - fm.stringWidth("GAME OVER")) / 2,
+                    (game.getField().getHeight() * cellSize) / 2);
         }
     }
 
+    /**
+     * Рисует сетку, разделяющую клетки игрового поля.
+     */
     private void drawGrid(Graphics g) {
-        for (int x = 0; x < game.getField().getWidth(); x++) {//Рисуем сетку
+        for (int x = 0; x < game.getField().getWidth(); x++) {
             for (int y = 0; y < game.getField().getHeight(); y++) {
                 g.setColor(Color.DARK_GRAY);
-                g.drawRect(x * game.CellSize, y * game.CellSize,
-                        game.CellSize, game.CellSize);
+                g.drawRect(x * cellSize, y * cellSize,
+                        cellSize, cellSize);
             }
         }
     }
 
-    private void paint_cell(Graphics g, int x, int y, Color color) {
-        g.setColor(color);
-        g.fillRect(x * game.CellSize, y * game.CellSize,
-                game.CellSize, game.CellSize);
-        g.setColor(Color.GRAY);
-        g.drawRect(x * game.CellSize, y * game.CellSize,
-                game.CellSize, game.CellSize);
+    private void drawObject(Graphics g, int x, int y, FieldObject object) throws IOException {
+        BufferedImage rawImage = ImageIO.read(new File(object.getFilepath()));
+        g.drawImage(rawImage, x * cellSize, y * cellSize, cellSize, cellSize, new ImageObserver() {
+            @Override
+            public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
+                return false;
+            }
+        });
     }
 
-    private void paint_circle(Graphics g, Point p, Color color) {
+    private void paintCell(Graphics g, int x, int y, Color color) {
+        g.setColor(color);
+        g.fillRect(x * cellSize, y * cellSize,
+                cellSize, cellSize);
+        g.setColor(Color.GRAY);
+        g.drawRect(x * cellSize, y * cellSize,
+                cellSize, cellSize);
+    }
+
+    private void paintCircle(Graphics g, Point p, Color color) {
         g.setColor(color);
         g.fillArc(p.x * 32, p.y * 32,
                 32 / 2, 32 / 2, 0, 360);
-
     }
 }
