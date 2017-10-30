@@ -11,7 +11,6 @@ public class Field {
 	private int width;
 	private FieldObject[][] field;
 
-
 	public Field(int width, int height){
 		field = new FieldObject[width][height];
 		for(int i=0; i < width; i++)
@@ -24,21 +23,21 @@ public class Field {
 		this.width = width;
 	}
 	
-	int getHeight() {
+	public int getHeight() {
 		return height;
 	}
 	
-	int getWidth() {
+	public int getWidth() {
 		return width;
 	}
 	
-	FieldObject getObjectAt(int x, int y) {
+	public FieldObject getObjectAt(int x, int y) {
 		if (x < 0 || x > this.width || y < 0 || y > this.height)
 			throw new IndexOutOfBoundsException("");
 		return field[x][y];
 	}
 	
-	void setObjectAt(int x, int y, FieldObject object) {
+	public void setObjectAt(int x, int y, FieldObject object) {
 		if (x<0 || x > this.width || y<0 || y > this.height)
 			throw new IndexOutOfBoundsException();
 		this.field[x][y] = object;
