@@ -13,12 +13,20 @@ public class Game {
 		field = new Field(20,20);
 		snake = new Snake(this);
 		appleGenerator = new AppleGenerator(this.field);
+		appleGenerator.placeAppleOnRandomEmptyCell();
+		newDirection = SnakeHead.DIRECTION_RIGHT;
+	}
+	public Game(char[][] level){
+		field = new Field(level);
+		snake = new Snake(this);
+		appleGenerator = new AppleGenerator(this.field);
+		appleGenerator.placeAppleOnRandomEmptyCell();
 		newDirection = SnakeHead.DIRECTION_RIGHT;
 	}
 
 	public void step(){
 		try {
-			Thread.sleep(200);
+			Thread.sleep(400);
 			snake.setDirection(newDirection);
 			snake.Move();
 		} catch (InterruptedException e) {
