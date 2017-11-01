@@ -28,7 +28,7 @@ public class Game {
 		try {
 			Thread.sleep(400);
 			snake.setDirection(newDirection);
-			snake.Move();
+			snake.move();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

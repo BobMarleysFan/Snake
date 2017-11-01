@@ -81,7 +81,7 @@ public class Drawer extends JPanel {
 
     private void paintCircle(Graphics g, Point p, Color color) {
         g.setColor(color);
-        g.fillArc(p.x * 32, p.y * 32,
+        g.fillArc(p.getX() * 32, p.getY() * 32,
                 32 / 2, 32 / 2, 0, 360);
     }
 }

@@ -24,13 +24,13 @@ public class Snake {
         this.game.getField().setObjectAt(this.game.getField().getWidth()/2+1, this.game.getField().getHeight()/2, head);
     }
 
-    public void Move() {
-        int oldX = this.snake.get(snake.size()-1).x;
-        int oldY = this.snake.get(snake.size()-1).y;
-        int newX = oldX + this.head.getDirection().x;
-        int newY = oldY+ this.head.getDirection().y;
+    public void move() {
+        int oldX = this.snake.get(snake.size() - 1).getX();
+        int oldY = this.snake.get(snake.size() - 1).getY();
+        int newX = oldX + this.head.getDirection().getX();
+        int newY = oldY+ this.head.getDirection().getY();
         Point tail = snake.get(0);
-        if(tail.x==newX && tail.y==newY){
+        if(tail.getX() ==newX && tail.getY() ==newY){
             game.getField().setObjectAt(oldX, oldY, new SnakeBody());
             game.getField().setObjectAt(newX, newY, head);
             snake.add(new Point(newX, newY));
@@ -49,7 +49,7 @@ public class Snake {
     public void cutTail() {
         Point tail = snake.get(0);
         snake.remove(0);
-        game.getField().setObjectAt(tail.x, tail.y, new EmptyCell());
+        game.getField().setObjectAt(tail.getX(), tail.getY(), new EmptyCell());
     }
 
     public void setDirection(Point dir){

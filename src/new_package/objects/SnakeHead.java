@@ -11,7 +11,7 @@ public class SnakeHead implements FieldObject{
 	private Point direction;
 
 	public void setDirection(Point dir) {
-		if (!(direction.x*dir.x == -1 || direction.y*dir.y == -1))
+		if (!(direction.getX() * dir.getX() == -1 || direction.getY() * dir.getY() == -1))
 			direction = dir;
 	}
 

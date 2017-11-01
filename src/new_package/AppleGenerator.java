@@ -16,6 +16,6 @@ public class AppleGenerator {
         ArrayList<Point> emptyCells = field.getEmptyCells();
         Random random = new Random();
         Point randomCell = emptyCells.get(random.nextInt(emptyCells.size()));
-        field.setObjectAt(randomCell.x, randomCell.y, new Apple());
+        field.setObjectAt(randomCell.getX(), randomCell.getY(), new Apple());
     }
 }
