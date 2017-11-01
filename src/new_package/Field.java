@@ -20,6 +20,7 @@ public class Field {
 		this.height = height;
 		this.width = width;
 	}
+
 	public Field(char[][] level){
 		width = level.length;
 		height = level[0].length;
@@ -52,7 +53,7 @@ public class Field {
 		return height;
 	}
 
-	public int getWidth() {
+ 	public int getWidth() {
 		return width;
 	}
 
