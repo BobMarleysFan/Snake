@@ -11,6 +11,7 @@ public class Snake {
     private ArrayList<Point> snake;
     private Game game;
     private SnakeHead head;
+    private Point newDirection;
 
     public Snake(Game game){
         this.game = game;
@@ -25,24 +26,25 @@ public class Snake {
     }
 
     public void move() {
-        int oldX = this.snake.get(snake.size() - 1).getX();
-        int oldY = this.snake.get(snake.size() - 1).getY();
-        int newX = oldX + this.head.getDirection().getX();
-        int newY = oldY+ this.head.getDirection().getY();
-        Point tail = snake.get(0);
-        if(tail.getX() ==newX && tail.getY() ==newY){
-            game.getField().setObjectAt(oldX, oldY, new SnakeBody());
-            game.getField().setObjectAt(newX, newY, head);
-            snake.add(new Point(newX, newY));
+        if(newDirection != null)
+            setDirection(newDirection);
+
+        Point headPos = snake.get(snake.size() - 1);
+        Point newHeadPos = new Point(
+                headPos.getX() + getDirection().getX(),
+                headPos.getY() + getDirection().getY()
+        );
+        Point tailPos = snake.get(0);
+
+        if(tailPos.equals(newHeadPos)){
+            moveSnake(headPos, newHeadPos);
             snake.remove(0);
             return;
         }
-        FieldObject intersectingObject = game.getField().getObjectAt(newX, newY);
-        if(intersectingObject.isWalkable()) {
-            game.getField().setObjectAt(oldX, oldY, new SnakeBody());
-            game.getField().setObjectAt(newX, newY, head);
-            snake.add(new Point(newX, newY));
-        }
+
+        FieldObject intersectingObject = game.getField().getObjectAt(newHeadPos.getX(), newHeadPos.getY());
+        if(intersectingObject.isWalkable())
+            moveSnake(headPos, newHeadPos);
         intersectingObject.intersect(game);
     }
 
@@ -58,5 +60,15 @@ public class Snake {
 
     public Point getDirection(){
         return head.getDirection();
+    }
+
+    public void setNewDirection(Point newDirection) {
+        this.newDirection = newDirection;
+    }
+
+    private void moveSnake(Point headPos, Point newHeadPos){
+        game.getField().setObjectAt(headPos.getX(), headPos.getY(), new SnakeBody());
+        game.getField().setObjectAt(newHeadPos.getX(), newHeadPos.getY(), head);
+        snake.add(new Point(newHeadPos.getX(), newHeadPos.getY()));
     }
 }

@@ -24,7 +24,8 @@ public class Main {
 
 
     public static void main(String[] args) throws InterruptedException {
-        Game g = new Game(level1);
+        //Game g = new Game(level1);
+        Game g = new Game();
         Gui gui = new Gui(g, 40);
         gui.InitUI();
         while(!g.stopCondition)
