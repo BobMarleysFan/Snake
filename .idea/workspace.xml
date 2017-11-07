@@ -6,7 +6,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/new_package/Main.java" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91c3d900-0d1c-444a-848c-59144718f850" name="Default" comment="Added /out/ to .gitignore.txt">
+    <list default="true" id="91c3d900-0d1c-444a-848c-59144718f850" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -541,7 +541,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510086112153</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="No changes">
+      <created>1510086337313</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1510086337313</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -577,7 +584,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114446000" />
+    <option name="totallyTimeSpent" value="114797000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -680,7 +687,8 @@
     <MESSAGE value="Новое GUI на Swing с контроллером.&#10;Другие измения...(много)" />
     <MESSAGE value="Добавлен 1 тест.&#10;Добавлены getter и setter у Point." />
     <MESSAGE value="Added /out/ to .gitignore.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added /out/ to .gitignore.txt" />
+    <MESSAGE value="No changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="No changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
