@@ -5,10 +5,10 @@ import javax.swing.*;
 
 public class Window extends JFrame {
     public Window(Game game, int cellSize) {
-        super("SnakeGame");
+        super("Snake");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(game.getField().getWidth() * cellSize + 7, //+ 218
-                game.getField().getHeight() * cellSize + 28);//+ 40
+        setSize(game.getField().getWidth() * cellSize + 7,
+                game.getField().getHeight() * cellSize + 28);
 
         setLocation(100, 100);
         setResizable(false);

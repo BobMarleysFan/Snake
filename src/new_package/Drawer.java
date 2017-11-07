@@ -61,7 +61,7 @@ public class Drawer extends JPanel {
     }
 
     private void drawObject(Graphics g, int x, int y, FieldObject object) throws IOException {
-        BufferedImage rawImage = ImageIO.read(new File(object.getFilepath()));
+        BufferedImage rawImage = ImageIO.read(new File(object.getPresenter().getFilepath()));
         g.drawImage(rawImage, x * cellSize, y * cellSize, cellSize, cellSize, new ImageObserver() {
             @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
