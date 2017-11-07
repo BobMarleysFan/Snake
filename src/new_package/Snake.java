@@ -15,7 +15,7 @@ public class Snake {
 
     public Snake(Game game){
         this.game = game;
-        snake = new ArrayList<Point>();
+        snake = new ArrayList<>();
         snake.add(new Point(this.game.getField().getWidth()/2-1, this.game.getField().getHeight()/2));
         snake.add(new Point(this.game.getField().getWidth()/2, this.game.getField().getHeight()/2));
         snake.add(new Point(this.game.getField().getWidth()/2+1, this.game.getField().getHeight()/2));
