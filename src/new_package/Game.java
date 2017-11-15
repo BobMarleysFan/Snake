@@ -1,6 +1,5 @@
 package new_package;
 
-import new_package.objects.SnakeHead;
 
 public class Game {
 	private int STEP_INTERVAL_IN_MILLIS = 400;
@@ -15,16 +14,16 @@ public class Game {
 	}
 
 	public Game(int width, int height){
-		field = new Field(width, height);
+		field = new Field(height, width);
 		snake = new Snake(this);
-		appleGenerator = new AppleGenerator(this.field);
+		appleGenerator = new AppleGenerator(field);
 		appleGenerator.placeAppleOnRandomEmptyCell();
 	}
 
 	public Game(char[][] level){
 		field = new Field(level);
 		snake = new Snake(this);
-		appleGenerator = new AppleGenerator(this.field);
+		appleGenerator = new AppleGenerator(field);
 		appleGenerator.placeAppleOnRandomEmptyCell();
 	}
 

@@ -2,9 +2,7 @@ package new_package.tests;
 
 import new_package.Field;
 import new_package.Point;
-import new_package.objects.EmptyCell;
-import new_package.objects.SnakeBody;
-import new_package.objects.Wall;
+import new_package.objects.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -13,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FieldTest {
     private int width;
-    private int height = 5;
+    private int height;
     private Field field ;
     private ArrayList<Point> emptyCells;
 
@@ -27,9 +25,20 @@ class FieldTest {
                 emptyCells.add(new Point(x,y));
     }
 
+    private void initFieldFromCharMatrix(char[][] matrix){
+        this.width = matrix[0].length;
+        this.height = matrix.length;
+        this.field = new Field(matrix);
+        this.emptyCells = new ArrayList<>();
+        for(int x=1; x<width-1; x++)
+            for(int y=1; y<height-1; y++)
+                emptyCells.add(new Point(x,y));
+    }
+
     @Test
     void testNewField(){
         initField(7, 5);
+
         assertEquals(width, field.getWidth());
         assertEquals(height, field.getHeight());
         for(int x=0; x<width; x++){
@@ -40,6 +49,11 @@ class FieldTest {
                     assertEquals(EmptyCell.class, field.getObjectAt(x, y).getClass());
             }
         }
+    }
+
+    @Test
+    void testFieldMethods(){
+        initField(5,5);
 
         assertIterableEquals(emptyCells, field.getEmptyCells());
 
@@ -52,6 +66,34 @@ class FieldTest {
 
     @Test
     void testFieldFromCharMatrix(){
+        char[][] charLevel = {
+                {'x','x','x','x','x'},
+                {'x','x','x','x','x'},
+                {' ',' ',' ',' ',' '},
+                {'a','s','S','x',' '}};
+        initFieldFromCharMatrix(charLevel);
 
+        assertEquals(width, field.getWidth());
+        assertEquals(height, field.getHeight());
+        for(int x=0; x<width; x++){
+            for (int y=0; y<height; y++){
+                if(y<2)
+                    assertEquals(Wall.class, field.getObjectAt(x, y).getClass());
+                else if(y==2)
+                    assertEquals(EmptyCell.class, field.getObjectAt(x, y).getClass());
+                else {
+                    if(x==0)
+                        assertEquals(Apple.class, field.getObjectAt(x, y).getClass());
+                    if(x==1)
+                        assertEquals(SnakeBody.class, field.getObjectAt(x, y).getClass());
+                    if(x==2)
+                        assertEquals(SnakeHead.class, field.getObjectAt(x, y).getClass());
+                    if(x==3)
+                        assertEquals(Wall.class, field.getObjectAt(x, y).getClass());
+                    if(x==4)
+                        assertEquals(EmptyCell.class, field.getObjectAt(x, y).getClass());
+                }
+            }
+        }
     }
 }

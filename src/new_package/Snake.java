@@ -13,32 +13,32 @@ public class Snake {
     private SnakeHead head;
     private Point newDirection;
 
-    public Snake(Game game){
-        this.game = game;
-        snake = new ArrayList<Point>();
-        snake.add(new Point(this.game.getField().getWidth()/2-1, this.game.getField().getHeight()/2));
-        snake.add(new Point(this.game.getField().getWidth()/2, this.game.getField().getHeight()/2));
-        snake.add(new Point(this.game.getField().getWidth()/2+1, this.game.getField().getHeight()/2));
+    public Snake(Game g){
+        game = g;
+        snake = new ArrayList<>();
+        getSegments().add(new Point(game.getField().getWidth()/2-1, game.getField().getHeight()/2));
+        getSegments().add(new Point(game.getField().getWidth()/2, game.getField().getHeight()/2));
+        getSegments().add(new Point(game.getField().getWidth()/2+1, game.getField().getHeight()/2));
         head = new SnakeHead(SnakeHead.DIRECTION_RIGHT);
-        this.game.getField().setObjectAt(this.game.getField().getWidth()/2-1, this.game.getField().getHeight()/2, new SnakeBody());
-        this.game.getField().setObjectAt(this.game.getField().getWidth()/2, this.game.getField().getHeight()/2, new SnakeBody());
-        this.game.getField().setObjectAt(this.game.getField().getWidth()/2+1, this.game.getField().getHeight()/2, head);
+        game.getField().setObjectAt(game.getField().getWidth()/2-1, game.getField().getHeight()/2, new SnakeBody());
+        game.getField().setObjectAt(game.getField().getWidth()/2, game.getField().getHeight()/2, new SnakeBody());
+        game.getField().setObjectAt(game.getField().getWidth()/2+1, game.getField().getHeight()/2, head);
     }
 
     public void move() {
         if(newDirection != null)
             setDirection(newDirection);
 
-        Point headPos = snake.get(snake.size() - 1);
+        Point headPos = getSegments().get(getSegments().size() - 1);
         Point newHeadPos = new Point(
                 headPos.getX() + getDirection().getX(),
                 headPos.getY() + getDirection().getY()
         );
-        Point tailPos = snake.get(0);
+        Point tailPos = getSegments().get(0);
 
         if(tailPos.equals(newHeadPos)){
             moveSnake(headPos, newHeadPos);
-            snake.remove(0);
+            getSegments().remove(0);
             return;
         }
 
@@ -49,8 +49,8 @@ public class Snake {
     }
 
     public void cutTail() {
-        Point tail = snake.get(0);
-        snake.remove(0);
+        Point tail = getSegments().get(0);
+        getSegments().remove(0);
         game.getField().setObjectAt(tail.getX(), tail.getY(), new EmptyCell());
     }
 
@@ -69,6 +69,10 @@ public class Snake {
     private void moveSnake(Point headPos, Point newHeadPos){
         game.getField().setObjectAt(headPos.getX(), headPos.getY(), new SnakeBody());
         game.getField().setObjectAt(newHeadPos.getX(), newHeadPos.getY(), head);
-        snake.add(new Point(newHeadPos.getX(), newHeadPos.getY()));
+        getSegments().add(new Point(newHeadPos.getX(), newHeadPos.getY()));
+    }
+
+    public ArrayList<Point> getSegments() {
+        return snake;
     }
 }

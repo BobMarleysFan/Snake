@@ -22,30 +22,17 @@ public class Field {
 	}
 
 	public Field(char[][] level){
-		width = level.length;
-		height = level[0].length;
+        for (char[] levelRow : level) {
+            if(!(levelRow.length == level[0].length))
+                throw new IllegalArgumentException();
+        }
+        width = level[0].length;
+		height = level.length;
         field = new FieldObject[width][height];
         for(int i=0; i < width; i++){
 			for (int j=0; j < height; j++){
-				field[i][j] = getObjectByChar(level[i][j]);
+				field[i][j] = FromCharLoader.getMap().get(level[j][i]);
 			}
-		}
-	}
-
-	private FieldObject getObjectByChar(char c) {
-		switch (c){
-			case '0':
-				return new EmptyCell();
-			case 'x':
-				return new Wall();
-			case 's':
-				return new SnakeBody();
-			case 'S':
-				return new SnakeHead(SnakeHead.DIRECTION_RIGHT);
-			case 'a':
-				return new Apple();
-			default:
-				return new EmptyCell();
 		}
 	}
 
