@@ -1,6 +1,7 @@
 package new_package;
 
 import new_package.objects.*;
+import new_package.presenters.*;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class Field {
 	}
 
 	public Field(char[][] level){
-        for (char[] levelRow : level) {
+		for (char[] levelRow : level) {
             if(!(levelRow.length == level[0].length))
                 throw new IllegalArgumentException();
         }
