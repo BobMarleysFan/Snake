@@ -1,1 +1,1 @@
-Java implementation of the Snake game for the 2nd course of OOP in the Ural Federal University.
+Java implementation of the Snake game on the 2nd course of OOP in the Ural Federal University.
